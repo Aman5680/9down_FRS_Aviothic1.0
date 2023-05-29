@@ -44,8 +44,10 @@ To deploy this project run
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[GNU](https://choosealicense.com/licenses/GNU/)
 
-This is free to use license# Contribute
+This is free to use license
+
+## Contribute
 
 Feel free to contribute 

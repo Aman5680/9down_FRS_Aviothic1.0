@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.button {
+    font-family: 'Times New Roman', Times, serif;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+    <title>form1</title>
+    <script type="text/javascript" src="message.js"></script>
+    <BODY background="kit.PNG"></BODY>
+    
+</head><H2><Body bgcolor="Cyan"><center><FONT Size="10"><FONT Color="Voilet"> KANPUR INSTITUTE OF TECHNOLOGY </FONT></FONT></center></H2>
+    <H3><center><FONT Size="5"><FONT Color="Voilet"> AKTU, AICTE, BTE and CSJMU AFFLIATED </FONT></FONT></center></H3>
+<body>
+    <center>
+    <h2>STUDENT LOGIN</h2>
+    <button class="button" onclick="msg()"><span>STUDENT LOGIN </span></button>
+    <h2>FACULTY LOGIN</h2>
+    <button class="button" onclick="msg()"><span>FACULTY LOGIN </span></button>
+    <h2>ADMIN LOGIN</h2>
+    <button class="button" onclick="msg()"><span>ADMIN LOGIN </span></button>
+    </center>
+    </FONT>
+</body>
+</html>

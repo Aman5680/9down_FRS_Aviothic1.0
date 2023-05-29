@@ -1,1 +1,1 @@
-# FacultyReviewSystem
+# FRS

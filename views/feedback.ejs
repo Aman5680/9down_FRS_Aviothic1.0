@@ -4,40 +4,68 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="message.js"></script>
     <title>Students Feedback Form</title>
     <H2><Body bgcolor="Cyan"><center><FONT Size="10"><FONT Color="Voilet"> KANPUR INSTITUTE OF TECHNOLOGY </FONT></FONT></center></H2>
         <H3><center><FONT Size="5"><FONT Color="Voilet"> AKTU, AICTE, BTE and CSJMU AFFLIATED </FONT></FONT></center></H3>
         <H2><Body bgcolor="Cyan"><center><FONT Size="10"><FONT Color="Red"> FEEDBACK FORM </FONT></FONT></center></H2>
-</head>
-<body bgcolor="Lightpink"><form>
+
+<div><center>
+    <h1>Student Details</h1>
+    <h2>ID: <%= _id %></h2>
+    <h2>UserName: <%= username %></h2>
+</center>
+</div>
+
+        </head>
+<body bgcolor="Lightpink">
     <BODY background="WhatsApp Image 2023-05-28 at 9.35.44 PM.jpeg"></BODY>
-    <center><P>Select Option</P>
-    <select name="Feedback Options" >
-        <option selected>Teachers</option>
-        <option> Infrastructure</option>
-    </select></center></form><br>
-    <form><center>
-        Remarks: <br><TEXTAREA Rows=6 Cols= 50 Name="Remarks">
+    <br>
+    <form action="/giveFeedback" method="POST">
+        
+        <center><P>Select Faculty</P>
+
+            <select name="f_id" >
+                <% faculties.forEach(function(item) { %>
+                <option value= <%= item._id %> ><%= item.name %></option>
+                <% }); %>
+        
+            </select></center>
+
+        <center>
+        Remarks: <br>
+        <TEXTAREA Rows=6 Cols= 50 name="feedback_text">
             Enter your remarks here
         </TEXTAREA>
-        <P>Specify your Rating</P>
+
+
+        <P>Give your Rating</P>
         <div class="rating">
-            <input type="radio" id="star5" name="rating" value="5">5
-            <label for="star5"></label>
-            <input type="radio" id="star4" name="rating" value="4">4
-            <label for="star4"></label>
-            <input type="radio" id="star3" name="rating" value="3">3
-            <label for="star3"></label>
-            <input type="radio" id="star2" name="rating" value="2">2
-            <label for="star2"></label>
-            <input type="radio" id="star1" name="rating" value="1">1
-            <label for="star1"></label>
+            <input type="radio" name="rating" value="5">5
+
+            <input type="radio" name="rating" value="4">4
+
+            <input type="radio" name="rating" value="3">3
+ 
+            <input type="radio" name="rating" value="2">2
+
+            <input type="radio" name="rating" value="1">1
+
           </div>
-    </center></form><center><br><br>
-    <INPUT Type="Submit" value="SEND" onclick="getValue()">
-    <INPUT Type="RESET" value="RESET" onclick="msg()">
 
     </center>
+    
+    <center><br><br>
+        <h3>
+        <button type="submit">Submit</button>
+    </h3>
+    </form>
+
+    </center>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </body>
 </html>

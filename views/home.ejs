@@ -5,17 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <style>
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
-
-body{
-  font-family: 'Open Sans', sans-serif;
-}
-
-      .button {
+<style>
+.button {
     font-family: 'Times New Roman', Times, serif;
   border-radius: 4px;
   background-color: #f4511e;
@@ -54,27 +45,84 @@ body{
   opacity: 1;
   right: 0;
 }
+</style>
 
-    </style>
+<style>
+
+nav {
+  background-color: #333;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ff7f50;
+}
 
 
+</style>
     <title>Home - FRS</title>
+    <script type="text/javascript" src="message.js"></script>
+    <BODY background="kit.PNG"></BODY>
     
+    <nav>
+      <div class="container">
+        <a href="#" class="logo">FRS App</a>
+        <ul class="nav-links">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </nav>
+    
+    
+</head><H2><Body bgcolor="Cyan"><center><FONT Size="10"><FONT Color="Voilet"> KANPUR INSTITUTE OF TECHNOLOGY </FONT></FONT></center></H2>
+    <H3><center><FONT Size="5"><FONT Color="Voilet"> AKTU, AICTE, BTE and CSJMU AFFLIATED </FONT></FONT></center></H3>
 <body>
-
-</head><H2><center><FONT Size="10"><FONT Color="Voilet"> KANPUR INSTITUTE OF TECHNOLOGY </FONT></FONT></center></H2>
-  <H3><center><FONT Size="5"><FONT Color="Voilet"> AKTU, AICTE, BTE and CSJMU AFFLIATED </FONT></FONT></center></H3>
-
-
     <center>
       <div id="app">
         <br>
         <a class="button" href="/reviews"><span>Show Reviews</span></a>
+        <a class="button" href="/login"><span>Student Login</span></a>
+        <a class="button" href="/register"><span>Student Register</span></a>
 
       </div>
-    
     </center>
     </FONT>
 </body>
 </html>
-

@@ -5,20 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap');
+
+body{
+  font-family: 'Open Sans', sans-serif;
+}
+
+      .button {
+    font-family: 'Times New Roman', Times, serif;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+    </style>
+
+
     <title>Home - FRS</title>
-    <BODY background="kit.PNG"></BODY>
     
-</head><H2><Body bgcolor="Cyan"><center><FONT Size="10"><FONT Color="Voilet"> KANPUR INSTITUTE OF TECHNOLOGY </FONT></FONT></center></H2>
-    <H3><center><FONT Size="5"><FONT Color="Voilet"> AKTU, AICTE, BTE and CSJMU AFFLIATED </FONT></FONT></center></H3>
 <body>
+
+</head><H2><center><FONT Size="10"><FONT Color="Voilet"> KANPUR INSTITUTE OF TECHNOLOGY </FONT></FONT></center></H2>
+  <H3><center><FONT Size="5"><FONT Color="Voilet"> AKTU, AICTE, BTE and CSJMU AFFLIATED </FONT></FONT></center></H3>
+
+
     <center>
-    <h2>STUDENT LOGIN</h2>
-    <button class="button"><span>STUDENT LOGIN </span></button>
-    <h2>FACULTY LOGIN</h2>
-    <button class="button"><span>FACULTY LOGIN </span></button>
-    <h2>ADMIN LOGIN</h2>
-    <button class="button"><span>ADMIN LOGIN </span></button>
+      <div id="app">
+        <br>
+        <a class="button" href="/reviews"><span>Show Reviews</span></a>
+
+      </div>
+    
     </center>
     </FONT>
 </body>

@@ -4,6 +4,7 @@
 A faculty review system which allows students to rate the faculties on the basis of their interactions.
 
 # Tech Stack
+I have used these technologies to build the web application
 - HTML
 - CSS
 - NODE JS
@@ -58,5 +59,4 @@ To deploy this project run
 This is free to use license
 
 ## Contribute
-
 Feel free to contribute 

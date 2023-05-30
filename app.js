@@ -141,7 +141,41 @@ app.get('/reviews', async (req, res)=>{
   const faccollection = db.collection('faculties');
   const faculties = await faccollection.find({}).toArray();
 
-  res.render('reviews', {faculties});
+  const revcollection = db.collection('reviews');
+  const reviews = await revcollection.find({}).toArray();
+
+  // const temp = await faccollection.aggregate([{
+  //   $lookup :
+  //   {
+  //     from: "reviews",
+  //     localField: "_id",
+  //     foreignField: "faculty_id",
+  //     as : "COMMON "
+  //   } 
+  // }]);
+
+  faculties.forEach(function(f){
+    let rating = 0;
+    let review_count = 0;
+    let rate5 = 0;
+
+    reviews.forEach(function(r){
+        if(f._id == r.faculty_id )
+        {
+          review_count++;
+          rating += parseInt(r.rating);
+        }
+      })
+    
+    // rating
+    rate5 = rating ? rating / (review_count * 5) * 5 : 0;
+    f.rating = parseInt(rate5);
+  });
+
+  console.log(faculties);
+
+  //res.sendStatus(200);
+  res.render('reviews', {faculties, reviews});
 });
 
 app.get('/feedback', async (req, res)=>{

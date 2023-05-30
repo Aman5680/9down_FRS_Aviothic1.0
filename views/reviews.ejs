@@ -11,53 +11,6 @@
 }
 </style>
 
-<style>
-nav {
-  background-color: #333;
-  height: 60px;
-  display: flex;
-  align-items: center;
-}
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 24px;
-  color: #fff;
-  text-decoration: none;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-}
-
-.nav-links li {
-  margin-left: 20px;
-}
-
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
-  transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #ff7f50;
-}
-
-
-</style>
-
 <title>Reviews - FRS</title>
 <style>
 .card {
@@ -99,17 +52,7 @@ button:hover, a:hover {
 
 </head>
 
-<nav>
-  <div class="container">
-    <a href="#" class="logo">FRS App</a>
-    <ul class="nav-links">
-      <li><a href="/home">Home</a></li>
-      <li><a href="/login">Login</a></li>
-      <li><a href="/register">Register</a></li>
-      <li><a href="/about">About</a></li>
-    </ul>
-  </div>
-</nav>
+<%- include('navbar') %>
 
 <body>
 
@@ -124,17 +67,24 @@ button:hover, a:hover {
       <div class="card">
         <img src="https://e7.pngegg.com/pngimages/349/288/png-clipart-teacher-education-student-course-school-avatar-child-face.png" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Faculty Name - <%= item.name %></h5>
+          <h5 class="card-title">Faculty - <%= item.name %></h5>
           
           <p class="card-text"><%= item.department %></p>
           <p class="card-text"><%= item.position %></p>
 
           <div>
-            <span class="fa fa-star checked"></span>
+
+          <% for (let i = 0; i < item.rating; i++) { %>
+
+              <span class="fa fa-star checked"></span>
+
+          <% } %>
+            
+            <!-- <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
         <span class="fa fa-star checked"></span>
         <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span> -->
 
           </div>
         </div>

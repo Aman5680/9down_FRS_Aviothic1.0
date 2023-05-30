@@ -3,6 +3,15 @@
 
 A faculty review system which allows students to rate the faculties on the basis of their interactions.
 
+# Tech Stack
+- HTML
+- CSS
+- NODE JS
+- EXPRESS JS
+- MONGODB
+- BOOTSTRAP 5
+- FONTAWESOME
+- GOOGLE FONTS
 
 ## Features
 

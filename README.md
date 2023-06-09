@@ -7,12 +7,12 @@ A faculty review system which allows students to rate the faculties on the basis
 I have used these technologies to build the web application
 - HTML
 - CSS
-- NODE JS
-- EXPRESS JS
-- MONGODB
-- BOOTSTRAP 5
-- FONTAWESOME
-- GOOGLE FONTS
+- Node JS
+- Express JS
+- MongoDB
+- Bootstrap 5
+- FontAwesome
+- Google Fonts
 
 ## Features
 

@@ -18,13 +18,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(session({
-  secret: 'your-secret-key',
+  secret: '5Rlqop7HnZZ7fT0pjDiXF0F60SRZDEQ7sanjay',
   resave: false,
   saveUninitialized: true
 }));
 
 
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 // or as an es module:
 // import { MongoClient } from 'mongodb'
 
@@ -40,11 +40,10 @@ async function main() {
   await client.connect();
   console.log('Connected successfully to server');
   const db = client.db(dbName);
-  const collection = db.collection('students');
+  //const collection = db.collection('students');
 
-  const findResult = await collection.find({}).toArray();
-  console.log(findResult);
-  // the following code examples can be pasted here...
+  // const findResult = await collection.find({}).toArray();
+  // console.log(findResult);
 
   return 'done.';
 }
@@ -93,7 +92,13 @@ app.post('/register', async (req, res) =>{
   });
 
   console.log('Inserted documents =>', insertResult);
-  res.send("Registered Successfully !");
+
+  // req.session._id = data._id;
+  // req.session.username = data.username;
+
+  // res.redirect('feedback');
+  
+     res.send("Registered Successfully !");
 
 });
 
@@ -152,7 +157,8 @@ app.get('/reviews', async (req, res)=>{
   //     foreignField: "faculty_id",
   //     as : "COMMON "
   //   } 
-  // }]);
+  // }]).toArray();
+  // console.log(temp);
 
   faculties.forEach(function(f){
     let rating = 0;
@@ -160,7 +166,10 @@ app.get('/reviews', async (req, res)=>{
     let rate5 = 0;
 
     reviews.forEach(function(r){
-        if(f._id == r.faculty_id )
+        const fObjId = Object(f._id);
+        const rObjFacId = Object(r.faculty_id);
+        
+        if(fObjId.equals(rObjFacId))
         {
           review_count++;
           rating += parseInt(r.rating);
@@ -171,8 +180,6 @@ app.get('/reviews', async (req, res)=>{
     rate5 = rating ? rating / (review_count * 5) * 5 : 0;
     f.rating = parseInt(rate5);
   });
-
-  console.log(faculties);
 
   //res.sendStatus(200);
   res.render('reviews', {faculties, reviews});
@@ -207,10 +214,10 @@ app.post('/giveFeedback', async (req, res) =>{
 
   const fac = await collection.insertOne(
     { 
-      "student_id":s_id, 
-      "faculty_id": f_id,
-      "rating": rating,
-      "feedback": feedback_text
+      "student_id": new ObjectId(s_id), 
+      "faculty_id": new ObjectId(f_id),
+      "rating": parseInt(rating),
+      "feedback": feedback_text.trim()
   });
 
 
@@ -232,7 +239,9 @@ app.get('/logout', (req, res) => {
   });
 });
 
-
+app.get('/about', (req,res)=>{
+res.render('about');
+});
 
 // Start the server
 app.listen(port, () => {

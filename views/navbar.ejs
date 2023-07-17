@@ -52,8 +52,12 @@
       <a href="/home" class="logo">FRS App</a>
       <ul class="nav-links">
         <li><a href="/home"><i class="fa-solid fa-house"></i> Home</a></li>
-        <li><a href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
-        <li><a href="/register"><i class="fa-solid fa-user-pen"></i> Register</a></li>
+        <% if (session._id) { %>
+        <li><a href="/logout"><i class="fa-solid fa-right-to-bracket"></i> Logout</a></li>
+        <% } else { %>
+          <li><a href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+          <li><a href="/register"><i class="fa-solid fa-user-pen"></i> Register</a></li>
+          <% } %>
         <li><a href="/about">About</a></li>
       </ul>
     </div>

@@ -62,7 +62,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/home', (req, res)=>{
-  res.render('home');
+  res.render('home', {session: req.session});
 });
 
 app.get('/register', (req, res)=>{
@@ -182,7 +182,7 @@ app.get('/reviews', async (req, res)=>{
   });
 
   //res.sendStatus(200);
-  res.render('reviews', {faculties, reviews});
+  res.render('reviews', {faculties, reviews, session: req.session});
 });
 
 app.get('/feedback', async (req, res)=>{
@@ -197,7 +197,7 @@ app.get('/feedback', async (req, res)=>{
   const collection = db.collection('faculties');
   const faculties = await collection.find({}).toArray();
 
-  res.render('feedback', {_id, username, faculties});
+  res.render('feedback', {_id, username, faculties, session: req.session});
 });
 
 app.post('/giveFeedback', async (req, res) =>{

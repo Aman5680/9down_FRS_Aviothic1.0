@@ -1,0 +1,7 @@
+version: '3.9'
+
+services:
+  frs-web:
+    build: ./Dockerfile
+    ports:
+      - "8001:3000"

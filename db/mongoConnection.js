@@ -5,17 +5,15 @@ const dbURI = `mongodb+srv://220159:220159password@cluster0.0ipredr.mongodb.net/
 
 
 async function Connect() {
-    await mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-    const db = mongoose.connection;
-
-    db.on('connected', () => {
-        console.log(`Connected to frs_app database`);
-    });
-
-    db.on('error', (err) => {
-        console.error(`Connection error: ${err}`);
-    });
+    try{
+        await mongoose.connect(dbURI);
+        console.log("Connected to mongodb frs_app database!")
+    }
+    catch(err)
+    {
+        console.log("Database error: ",err);
+    }
 }
 
 module.exports = Connect;

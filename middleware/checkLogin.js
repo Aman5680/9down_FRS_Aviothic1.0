@@ -1,7 +1,7 @@
 const checkLogin = (req, res, next) => {
     const { _id, username } = req.session;
-
-    if (_id) {
+    console.log(req.session);
+    if (username) {
         next();
     } else {
         return res.redirect("/login");

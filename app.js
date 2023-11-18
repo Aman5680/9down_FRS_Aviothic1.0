@@ -127,29 +127,8 @@ app.post('/login', async (req, res) => {
 app.get('/reviews', async (req, res) => {
 
   const faculties = await Faculty.find();
-  const reviews = await Review.find();
-
-  faculties.forEach(function (f) {
-    let rating = 0;
-    let review_count = 0;
-    let rate5 = 0;
-
-    reviews.forEach(function (r) {
-      const fObjId = Object(f._id);
-      const rObjFacId = Object(r.faculty);
-
-      if (fObjId.equals(rObjFacId)) {
-        review_count++;
-        rating += parseInt(r.rating);
-      }
-    })
-
-    // rating
-    rate5 = rating ? rating / (review_count * 5) * 5 : 0;
-    f.rating = parseInt(rate5);
-  });
-
-  res.render('reviews', { faculties, reviews, session: req.session });
+  res.render('reviews', { faculties, session: req.session });
+  
 });
 
 app.get('/feedback', checkLogin, async (req, res) => {
@@ -167,12 +146,15 @@ app.post('/giveFeedback', async (req, res) => {
   const s_id = req.session._id;
   const { f_id, feedback_text, rating } = req.body;
 
+  // Find review of the student for the faculty
   const existingReview = await Review.findOne({ "faculty": f_id, "student": s_id });
 
+  // Return because he already reviewed the faculty
   if (existingReview)
     return res.send("You already reviewed the faculty !");
 
   try {
+    // Make new Review
     const newReview = await Review(
       {
         "student": s_id,
@@ -180,9 +162,16 @@ app.post('/giveFeedback', async (req, res) => {
         "rating": parseInt(rating),
         "feedback": feedback_text.trim()
       });
+    
+    // Update faculty rating and increment the total review count
+    const facultyData = await Faculty.findOne({_id: f_id});
+    facultyData.totalRating += parseInt(rating);
+    facultyData.totalReviews =  facultyData.totalReviews + 1; 
   
+    // Save the changes
     newReview.save();
-  
+    facultyData.save();
+
     res.send("Feedback Successfully sent!")
   } catch (error) {
     res.send(error);

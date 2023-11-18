@@ -73,8 +73,8 @@ button:hover, a:hover {
           <p class="card-text"><%= item.position %></p>
 
           <div>
-
-          <% for (let i = 0; i < item.rating; i++) { %>
+          
+          <% for (let i = 0; i < Math.floor(item.totalRating / item.totalReviews) ; i++) { %>
 
               <span class="fa fa-star checked"></span>
 

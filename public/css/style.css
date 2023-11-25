@@ -992,7 +992,7 @@ a:focus {
   color: #2c7873;
 }
 
-/* footer section*/
+
 .footer_section {
   position: relative;
   background-color: #ffffff;
@@ -1008,4 +1008,19 @@ a:focus {
 .footer_section p a {
   color: inherit;
 }
-/*# sourceMappingURL=style.css.map */
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}

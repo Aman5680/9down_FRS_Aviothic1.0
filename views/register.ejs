@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/FAVICON.png" type="image/x-icon">
+  <title>Registration Page </title>
+  <%- include('layouts/styles') %>
+
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      <img src="images/bg.png" alt="">
+    </div>
+    
+    <%- include('layouts/navbar') %>
+ 
+  </div>
+
+  <div class="card bg-light">
+    <article class="card-body mx-auto" style="max-width: 100%;">
+      <h4 class="card-title mt-3 text-center">Create Account</h4>
+      <form>
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+         </div>
+            <input name="" class="form-control" placeholder="Full name" type="text">
+        </div> <!-- form-group// -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+         </div>
+            <input name="" class="form-control" placeholder="Email address" type="email">
+        </div> <!-- form-group// -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+        </div>
+          <input name="" class="form-control" placeholder="Phone number" type="text">
+        </div>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
+            <input class="form-control" placeholder="Create password" type="password">
+        </div> <!-- form-group// -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
+            <input class="form-control" placeholder="Repeat password" type="password">
+        </div> <!-- form-group// -->                                      
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block"> Sign Up  </button>
+        </div> <!-- form-group// -->      
+        <p class="text-center">Have an account? <a href="login">Sign In</a> </p>                                                                 
+    </form>
+</article>
+
+
+  <%- include('layouts/footer') %>
+
+</body>
+
+</html>

@@ -28,15 +28,32 @@ Connect()
 
 // Define routes
 app.get('/', (req, res) => {
-  res.send("Welcome to FRS Web Application !");
+  res.redirect("/home");
 });
+
 
 app.get('/home', (req, res) => {
   res.render('home', { session: req.session });
 });
 
+
 app.get('/register', (req, res) => {
   res.render('register');
+});
+
+
+app.get('/services', (req, res) => {
+  res.render('services');
+});
+
+
+app.get('/contact', (req, res) => {
+  res.render('contact');
+});
+
+
+app.get('/team', (req, res) => {
+  res.render('team');
 });
 
 
@@ -197,6 +214,25 @@ app.get('/logout', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about');
 });
+
+
+// Handle Errors
+
+// Error handling middleware for all errors, including 404 (page not found)
+app.use((req, res, next) => {
+  const error = new Error('Page Not Found');
+  error.status = 404;
+  next(error);
+});
+
+// Custom error handler middleware
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.send(err.message || 'Internal Server Error');
+  // Or render a specific error page:
+  // res.render('error', { error: err }); // Assuming you have an 'error.ejs' or similar file
+});
+
 
 
 // Start the server

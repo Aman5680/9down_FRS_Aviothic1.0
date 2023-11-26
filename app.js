@@ -120,9 +120,10 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
 
-  const { username, password } = req.body;
-
-  data = await Student.findOne({ "username": username });
+  // const { username, password } = req.body;
+  const { email, password } = req.body;
+  console.log(req.body);
+  data = await Student.findOne({ "email": email });
 
   if (data) {
     if (data.password == password) {

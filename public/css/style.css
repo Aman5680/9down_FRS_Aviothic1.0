@@ -1024,3 +1024,10 @@ height: calc(100% - 73px);
 height: 100%;
 }
 }
+
+ footer{
+  background-color: #004445;
+}
+footer i{
+  color: #ccc;
+}

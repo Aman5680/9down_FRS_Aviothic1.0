@@ -59,12 +59,12 @@ app.get('/team', (req, res) => {
 
 app.post('/register', async (req, res) => {
 
-  const { username, email, password, cpassword } = req.body;
+  const { username, email, password } = req.body;
 
-  if (password != cpassword)
-    return res.send("Password and Confirm Password did not matched !");
+  // if (password != cpassword)
+  //   return res.send("Password and Confirm Password did not matched !");
 
-  data = await Student.findOne({ "username": username });
+  data = await Student.findOne({ email });
 
   if (data)
     return res.send("You have already registered !");

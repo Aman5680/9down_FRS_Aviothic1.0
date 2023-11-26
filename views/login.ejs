@@ -31,7 +31,7 @@
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form>
+              <form action="/login" method="POST">
                 <div class="d-flex align-items-center justify-content-center">
                   <h4 class="font-weight-bold pb-3">Login into your Account!</h4>
 
@@ -40,15 +40,15 @@
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                   <label class="form-label mb-1">Email Address</label>
-                  <input type="email" id="email" class="form-control form-control-lg"
-                    placeholder="Enter a valid email address" autofocus autocomplete="off" />
+                  <input type="email" name="email" class="form-control form-control-lg"
+                    placeholder="Enter a valid email address" autofocus autocomplete="off" required />
                 </div>
       
                 <!-- Password input -->
                 <div class="form-outline mb-3">
                   <label class="form-label mb-1">Password</label>
-                  <input type="password" id="password" class="form-control form-control-lg"
-                    placeholder="Enter password" autocomplete="off" />
+                  <input type="password" name="password" class="form-control form-control-lg"
+                    placeholder="Enter password" autocomplete="off"  required/>
                 </div>
       
                 <div class="d-flex justify-content-between align-items-center">
@@ -63,7 +63,7 @@
                 </div>
       
                 <div class="text-center text-lg-start mt-4 pt-2">
-                  <button id="Submit" type="button" class="btn btn-primary btn-lg"
+                  <button type="submit" class="btn btn-primary btn-lg"
                     style="padding-left: 2.5rem; padding-right: 2.5rem; width: 100%;">Login</button>
                   <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register"
                       class="link-danger">Sign Up</a></p>

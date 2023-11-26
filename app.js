@@ -38,7 +38,7 @@ app.get('/home', (req, res) => {
 
 
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', {error: null });
 });
 
 
@@ -67,7 +67,7 @@ app.post('/register', async (req, res) => {
   data = await Student.findOne({ email });
 
   if (data)
-    return res.send("You have already registered !");
+    return res.render("register", { error: "You have already registered !"});
 
   const student = new Student({
     "username": username,
@@ -113,7 +113,7 @@ app.get('/login', (req, res) => {
   if (req.session._id)
     return res.redirect('feedback');
 
-  res.render('login');
+  res.render('login', {error: null });
 
 });
 
@@ -133,10 +133,11 @@ app.post('/login', async (req, res) => {
       res.redirect('feedback');
     }
     else {
-      res.send("Your Username or Password is Incorrect !");
+      // res.send("Your Username or Password is Incorrect !");
+      return res.render("login", { error: "Your Username or Password is Incorrect !"})
     }
   } else {
-    res.send("Your Username or Password is Incorrect !");
+    return res.render("login", { error: "Your Username or Password is Incorrect !"})
   }
 });
 

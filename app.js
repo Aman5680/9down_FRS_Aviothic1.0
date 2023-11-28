@@ -56,6 +56,10 @@ app.get('/team', (req, res) => {
   res.render('team');
 });
 
+app.get('/facultyreview', (req, res) => {
+  res.render('facultyreview');
+});
+
 
 app.post('/register', async (req, res) => {
 

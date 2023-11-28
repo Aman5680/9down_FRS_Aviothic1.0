@@ -1,1 +1,63 @@
-<h2>Give your feedback</h2>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/fevicon.png" type="image/x-icon">
+  <title>Feedback Page</title>
+
+  <%- include('layouts/styles') %>
+
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      <img src="images/hero-bg.jpg" alt="">
+    </div>
+    <!-- header section strats -->
+    <%- include('layouts/navbar') %>
+
+    <!-- end header section -->
+
+  </div>
+
+  <!-- feedback section -->
+  
+  <section id="feed">
+  <div class="form-group green-border-focus">
+    <label for="exampleFormControlTextarea5">Type Your Feedback </label>
+    <textarea class="form-control" id="exampleFormControlTextarea5" rows="7"></textarea>
+  </div>
+  <div class="rate">
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  </div>
+  <div class="sbtn">
+  <button type="submit" class="btn btn-primary btn-lg" >Submit</button>
+</div>
+
+</section>
+
+  <!--  section ends -->
+
+  <!-- footer section -->
+  <%- include('layouts/footer') %>
+
+  <!-- footer section -->
+
+  
+</body>
+
+</html>

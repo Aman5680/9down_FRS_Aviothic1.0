@@ -1052,7 +1052,7 @@ label{
   height: 70vh;
 }
 .sbtn{
-   padding-left: 45%;
+   padding-left: 47%;
    padding-top: 10px;
 
 }
@@ -1061,11 +1061,7 @@ label{
   color: orange;
 }
 
-.rate{
-  padding-left: 40%;
-  padding-top: 20px;
-  font-size: 45px;
-}
+
 
 @media (max-width: 450px){
 

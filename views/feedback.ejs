@@ -33,20 +33,42 @@
   <!-- feedback section -->
   
   <section id="feed">
-  <div class="form-group green-border-focus">
-    <label for="exampleFormControlTextarea5">Type Your Feedback </label>
-    <textarea class="form-control" id="exampleFormControlTextarea5" rows="7"></textarea>
-  </div>
-  <div class="rate">
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star checked"></span>
-  <span class="fa fa-star"></span>
-  <span class="fa fa-star"></span>
-  </div>
-  <div class="sbtn">
-  <button type="submit" class="btn btn-primary btn-lg" >Submit</button>
-</div>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <div class="my-div">
+            <!-- Your content goes here -->
+
+
+
+            <span>Student Details</span>
+            <p>ID: <strong><%= _id %></strong></p>
+            <p>UserName: <strong><%= username %></strong></p>
+
+
+
+            <p>Select Faculty:</p>
+            <select name="f_id" class="form-select">
+              <% faculties.forEach(function(item) { %>
+                <option value= <%= item._id %> ><%= item.name %></option>
+                <% }); %>
+              </select>
+
+
+
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                  <label for="floatingTextarea2">Give your comments about the faculty</label>
+                </div>
+
+              
+
+          </div>
+        </div>
+      </div>
+    </div>
+    
 
 </section>
 

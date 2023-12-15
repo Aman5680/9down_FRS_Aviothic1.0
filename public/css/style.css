@@ -1031,3 +1031,11 @@ height: 100%;
 footer i{
   color: #ccc;
 }
+
+#feed{
+  margin: 70px 0px;
+}
+
+.align-r{
+  text-align: right;
+}

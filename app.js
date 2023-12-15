@@ -169,6 +169,9 @@ app.post('/giveFeedback', async (req, res) => {
   const s_id = req.session._id;
   const { f_id, feedback_text, rating } = req.body;
 
+  if(!feedback_text) return res.send("Please fill feedback text!")
+  if(!rating) return res.send("Please provide rating!")
+
   // Find review of the student for the faculty
   const existingReview = await Review.findOne({ "faculty": f_id, "student": s_id });
 

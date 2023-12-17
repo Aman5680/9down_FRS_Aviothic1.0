@@ -3,16 +3,10 @@
 
 A faculty review system which allows students to rate the faculties on the basis of their interactions.
 
-# Tech Stack
-I have used these technologies to build the web application
-- HTML
-- CSS
-- Node JS
-- Express JS
-- MongoDB
-- Bootstrap 5
-- FontAwesome
-- Google Fonts
+<img src="https://github.com/SanjaySRocks/9down_FRS_Aviothic1.0/blob/main/public/images/FAVICON.png">
+
+# Live Preview
+Link:- https://frs-85kd.onrender.com
 
 ## Features
 
@@ -22,6 +16,20 @@ I have used these technologies to build the web application
 - Cross platform
 - Customised Design
 - Dynamic Web Pages
+
+
+# Tech Stack
+Technologies used to build the web application
+
+- HTML
+- CSS
+- Node JS
+- Express JS
+- MongoDB
+- Bootstrap 5
+- FontAwesome
+- Google Fonts
+
 
 ## Installation
 

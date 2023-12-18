@@ -32,17 +32,48 @@
 
   <!-- feedback section -->
   
-  <section id="feed"><center>
-  <div class="form-group green-border-focus">
-    <label for="exampleFormControlTextarea5">Type Your Feedback </label>
-    <textarea class="form-control" id="exampleFormControlTextarea5" rows="7"></textarea>
-  </div></center>
- 
-  <div class="sbtn">
-  <button type="submit" class="btn btn-primary btn-lg" >Submit</button>
-</div>
+    <H2><Body bgcolor="Cyan"><center><FONT Size="10"><FONT Color="#2c7873"> FEEDBACK FORM </FONT></FONT></center></H2>
 
-</section>
+<div><center>
+<h3>Student Details</h3>
+<h4>ID: <%= _id %></h4>
+<h5>UserName: <%= username %></h5>
+</center>
+</div>
+<form action="/giveFeedback" method="POST">
+    <center>
+    <TEXTAREA Rows=6 Cols= 50 name="feedback_text">
+        Give Your Feedback  
+    </TEXTAREA>
+
+
+    <P>Give your Rating</P>
+    <div class="rating">
+        <input type="radio" name="rating" value="5">5
+
+        <input type="radio" name="rating" value="4">4
+
+        <input type="radio" name="rating" value="3">3
+
+        <input type="radio" name="rating" value="2">2
+
+        <input type="radio" name="rating" value="1">1
+
+      </div>
+
+</center>
+
+<center><br><br>
+  
+<div class="btn-box">
+  <button type="submit" class="btn4">Submit</button>
+</div>
+</form>
+
+</center>
+
+<br>
+
 
   <!--  section ends -->
 

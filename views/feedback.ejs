@@ -26,53 +26,90 @@
     <!-- header section strats -->
     <%- include('layouts/navbar') %>
 
-    <!-- end header section -->
+      <!-- end header section -->
 
   </div>
 
   <!-- feedback section -->
-  
-    <H2><Body bgcolor="Cyan"><center><FONT Size="10"><FONT Color="#2c7873"> FEEDBACK FORM </FONT></FONT></center></H2>
 
-<div><center>
-<h3>Student Details</h3>
-<h4>ID: <%= _id %></h4>
-<h5>UserName: <%= username %></h5>
-</center>
-</div>
-<form action="/giveFeedback" method="POST">
-    <center>
-    <TEXTAREA Rows=6 Cols= 50 name="feedback_text">
-        Give Your Feedback  
-    </TEXTAREA>
+  <section id="feed">
+
+    <div class="container">
+
+      <div class="d-flex justify-content-center">
+        <div class="my-div">
+          <!-- Your content goes here -->
+
+          <h3>Submit your feedback</h3>
 
 
-    <P>Give your Rating</P>
-    <div class="rating">
-        <input type="radio" name="rating" value="5">5
+          <div class="alert alert-primary" role="alert">
+            <span>Username: <strong class="align-r">
+                <%= username %>
+              </strong></span><br>
+            <span>ID: <strong>
+                <%= _id %>
+              </strong></span><br>
+          </div>
 
-        <input type="radio" name="rating" value="4">4
 
-        <input type="radio" name="rating" value="3">3
+          
 
-        <input type="radio" name="rating" value="2">2
+          <form id="my-form" action="/giveFeedback" method="POST">
 
-        <input type="radio" name="rating" value="1">1
+            <div class="form-floating">
+              <label>Select faculty</label>
+              <select name="f_id" class="form-select mb-3 w-100">
 
+                <% faculties.forEach(function(item) { %>
+                  <option value=<%=item._id %> ><%= item.name %>
+                  </option>
+                  <% }); %>
+
+              </select>
+            </div>
+
+
+            <div class="form-floating">
+              <textarea name="feedback_text" required class="form-control" placeholder="Leave a comment here"
+                style="height: 125px"></textarea>
+            </div>
+
+            <div class="rate-buttons my-3">
+              <div class="form-check form-check-inline">
+                <input selected class="form-check-input" type="radio" name="rating" value="5">
+                <label class="form-check-label">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rating" value="4">
+                <label class="form-check-label">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rating" value="3">
+                <label class="form-check-label">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rating" value="2">
+                <label class="form-check-label">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rating" value="1">
+                <label class="form-check-label">1</label>
+              </div>
+            </div>
+
+            <button id="submit_btn" type="submit"
+              class="btn btn-primary my-3 d-flex w-100 justify-content-center">Submit Review</button>
+          </form>
+
+        </div>
       </div>
+    </div>
 
-</center>
 
-<center><br><br>
-  
-<div class="btn-box">
-  <button type="submit" class="btn4">Submit</button>
-</div>
-</form>
 
-</center>
 
-<br>
+  </section>
 
 
   <!--  section ends -->
@@ -80,9 +117,31 @@
   <!-- footer section -->
   <%- include('layouts/footer') %>
 
-  <!-- footer section -->
+    <script>
+      document.getElementById('my-form').addEventListener('submit', function (event) {
 
-  
+        var radios = document.getElementsByName('rating');
+        var formValid = false;
+
+        for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked) {
+            formValid = true;
+            break;
+          }
+        }
+
+        if (!formValid) {
+          alert('Please select at least one option');
+          event.preventDefault(); // Prevent form submission
+        }
+
+      });
+
+    </script>
+
+    <!-- footer section -->
+
+
 </body>
 
 </html>

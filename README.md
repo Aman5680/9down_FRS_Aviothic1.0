@@ -8,6 +8,9 @@ A faculty review system which allows students to rate the faculties on the basis
 # Live Preview
 Link:- https://frs-85kd.onrender.com
 
+# Secreenshots
+<a href="https://imgur.com/2jR6980"><img src="https://i.imgur.com/2jR6980.png" title="source: imgur.com" /></a>
+
 ## Features
 
 - Easy Student Registration

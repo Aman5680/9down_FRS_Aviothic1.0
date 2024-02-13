@@ -47,7 +47,7 @@ To deploy this project run
 
 - [@aman5680](https://www.github.com/aman5680)
 
-- [@vishwanilesh09](https://www.github.com/vishwanilesh09)
+- [@nileshvishwa](https://www.github.com/nileshvishwa)
 
 - [@arjunsingh607](https://www.github.com/arjunsingh607)
 

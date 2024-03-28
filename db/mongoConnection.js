@@ -1,7 +1,8 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 
-const dbURI = `mongodb+srv://220159:220159password@cluster0.0ipredr.mongodb.net/frs_app?retryWrites=true&w=majority`;
+const dbURI = process.env.MONGO_DBURL
 
 
 async function Connect() {

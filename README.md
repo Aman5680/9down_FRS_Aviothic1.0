@@ -27,7 +27,7 @@ docker-compose up
 ```
 
 
-# Secreenshots
+# Screenshots
 <a href="https://imgur.com/2jR6980"><img width="50%" height="50%" src="https://i.imgur.com/2jR6980.png" title="source: imgur.com" /></a>
 
 ## Features

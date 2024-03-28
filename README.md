@@ -3,13 +3,32 @@
 
 A faculty review system which allows students to rate the faculties on the basis of their interactions.
 
-<img src="https://github.com/SanjaySRocks/9down_FRS_Aviothic1.0/blob/main/public/images/FAVICON.png">
+<img width="25%" height="25%" src="https://github.com/SanjaySRocks/9down_FRS_Aviothic1.0/blob/main/public/images/FAVICON.png">
 
 # Live Preview
 Link:- https://frs-85kd.onrender.com
 
+# Deployement
+
+```
+npm install
+```
+
+```
+npm start
+```
+
+# Deployement using Docker
+
+Note:- You must install docker and docker-compose package to run this command
+
+```
+docker-compose up
+```
+
+
 # Secreenshots
-<a href="https://imgur.com/2jR6980"><img src="https://i.imgur.com/2jR6980.png" title="source: imgur.com" /></a>
+<a href="https://imgur.com/2jR6980"><img width="50%" height="50%" src="https://i.imgur.com/2jR6980.png" title="source: imgur.com" /></a>
 
 ## Features
 

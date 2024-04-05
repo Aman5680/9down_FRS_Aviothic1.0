@@ -33,9 +33,7 @@ Connect()
 
 
 // Auth route
-app.get("/auth/google/failure", (req, res) => {
-  res.send("Failed")
-})
+
 app.get("/auth/google/success", async (req, res) => {
   // console.log(req.user)
 

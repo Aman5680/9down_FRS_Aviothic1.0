@@ -6,6 +6,9 @@ const Faculty = require('./models/Faculty');
 const Review = require('./models/Review');
 const checkLogin = require('./middleware/checkLogin');
 
+const passport =require("passport")
+require('./passport');
+
 const app = express();
 const port = 3000;
 
@@ -21,9 +24,59 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Connect Monogodb
 Connect()
+
+
+// Auth route
+
+app.get("/auth/google/success", async (req, res) => {
+  // console.log(req.user)
+
+  const email = req.user.email;
+
+  data = await Student.findOne({ email });
+
+  if (data)
+  {
+    console.log("Student Details fetched from database")
+    req.session._id = data._id;
+    req.session.username = data.username;
+  }else{
+    console.log("New Student Registered!")
+    const student = new Student({
+      "username": req.user.email,
+      "email": req.user.email,
+      "password": ""
+    });
+  
+    await student.save();
+
+    req.session._id = student._id;
+    req.session.username = student.username;
+
+  }
+
+  res.redirect('/feedback');
+})
+
+
+app.get('/auth/google',
+  passport.authenticate('google', {
+          scope: ['email', 'profile'],
+          prompt: ['select_account']
+      }
+  ));
+
+app.get( '/auth/google/callback',
+    passport.authenticate( 'google', {
+        successRedirect: '/auth/google/success',
+        failureRedirect: '/login'
+}));
 
 
 // Define routes
@@ -206,18 +259,16 @@ app.post('/giveFeedback', async (req, res) => {
 
 
 app.get('/logout', (req, res) => {
-  // Destroy the session
-  req.session.destroy((err) => {
-    if (err) {
-      console.error('Error destroying session:', err);
-      res.sendStatus(500);
-      return;
-    }
 
-    // Redirect to the login page or any other page
-    res.redirect('/login');
-  });
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        return res.sendStatus(500); 
+      } 
+        res.redirect('/login');
+      });
 });
+
 
 
 app.get('/about', (req, res) => {

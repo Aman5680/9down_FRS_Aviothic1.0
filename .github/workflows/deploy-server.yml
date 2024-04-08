@@ -43,3 +43,4 @@ jobs:
           script: |
             cd /root/frs
             docker-compose down
+            docker-compose up -d

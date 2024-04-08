@@ -23,10 +23,5 @@ jobs:
           script: |
             cd /root/frs/
             git pull origin main
-
-            # Rebuild Docker image
-            docker-compose build
-
-            # Restart Docker Compose services
             docker-compose down
-            docker-compose up -d
+            docker-compose up -d --build

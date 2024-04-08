@@ -13,11 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Use SSH key
-      #   uses: webfactory/ssh-agent@v0.5.3
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -25,4 +20,13 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          script: whoami
+          script: |
+            cd /root/frs/
+            git pull origin main
+
+            # Rebuild Docker image
+            docker-compose build
+
+            # Restart Docker Compose services
+            docker-compose down
+            docker-compose up -d

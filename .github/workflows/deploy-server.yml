@@ -42,5 +42,9 @@ jobs:
           port: 22
           script: |
             cd /root/frs/
-            docker-compose down
-            docker-compose up -d
+            
+            for attempt in 1 2 3; do
+              docker-compose down
+              docker-compose up -d && break
+              sleep 10  # Wait for 10 seconds before retrying
+            done

@@ -7,7 +7,9 @@ const Review = require('./models/Review');
 const checkLogin = require('./middleware/checkLogin');
 
 const passport =require("passport")
-require('./passport');
+require('./auth/google-auth');
+require('./auth/local-auth');
+const flash = require('connect-flash');
 
 const app = express();
 const port = 3000;
@@ -26,7 +28,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 
 // Connect Monogodb
 Connect()
@@ -34,35 +36,6 @@ Connect()
 
 // Auth route
 
-app.get("/auth/google/success", async (req, res) => {
-  // console.log(req.user)
-
-  const email = req.user.email;
-
-  data = await Student.findOne({ email });
-
-  if (data)
-  {
-    console.log("Student Details fetched from database")
-    req.session._id = data._id;
-    req.session.username = data.username;
-  }else{
-    console.log("New Student Registered!")
-    const student = new Student({
-      "username": req.user.email,
-      "email": req.user.email,
-      "password": ""
-    });
-  
-    await student.save();
-
-    req.session._id = student._id;
-    req.session.username = student.username;
-
-  }
-
-  res.redirect('/feedback');
-})
 
 
 app.get('/auth/google',
@@ -74,7 +47,7 @@ app.get('/auth/google',
 
 app.get( '/auth/google/callback',
     passport.authenticate( 'google', {
-        successRedirect: '/auth/google/success',
+        successRedirect: '/feedback',
         failureRedirect: '/login'
 }));
 
@@ -118,21 +91,12 @@ app.post('/register', async (req, res) => {
 
   const { username, email, password } = req.body;
 
-  // if (password != cpassword)
-  //   return res.send("Password and Confirm Password did not matched !");
+  existingUser = await Student.findOne({ email });
 
-  data = await Student.findOne({ email });
-
-  if (data)
+  if (existingUser)
     return res.render("register", { error: "You have already registered !"});
 
-  const student = new Student({
-    "username": username,
-    "email": email,
-    "password": password
-  });
-
-  student.save();
+  const student = await Student.createUser(username, email, password);
 
   console.log('Inserted documents =>', student);
 
@@ -140,9 +104,7 @@ app.post('/register', async (req, res) => {
   // req.session.username = data.username;
 
   // res.redirect('feedback');
-
   res.send("Registered Successfully !");
-
 });
 
 
@@ -167,59 +129,44 @@ app.get('/add', async (req, res) => {
 
 app.get('/login', (req, res) => {
 
-  if (req.session._id)
+  if (req.user)
     return res.redirect('feedback');
 
-  res.render('login', {error: null });
+  res.render('login', { error: req.flash('error') });
 
 });
 
 
-app.post('/login', async (req, res) => {
-
-  // const { username, password } = req.body;
-  const { email, password } = req.body;
-  console.log(req.body);
-  data = await Student.findOne({ "email": email });
-
-  if (data) {
-    if (data.password == password) {
-      req.session._id = data._id;
-      req.session.username = data.username;
-
-      res.redirect('feedback');
-    }
-    else {
-      // res.send("Your Username or Password is Incorrect !");
-      return res.render("login", { error: "Your Username or Password is Incorrect !"})
-    }
-  } else {
-    return res.render("login", { error: "Your Username or Password is Incorrect !"})
-  }
-});
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/feedback',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
 
 
 
 app.get('/reviews', async (req, res) => {
 
   const faculties = await Faculty.find();
-  res.render('reviews', { faculties, session: req.session });
+  res.render('reviews', { faculties, user: req.user });
   
 });
 
-app.get('/feedback', checkLogin, async (req, res) => {
+app.get('/feedback', isAuthenticated, async (req, res) => {
 
-  const _id = req.session._id;
-  const username = req.session.username;
+  const _id = req.user._id;
+  const username = req.user.username;
   
   const faculties = await Faculty.find();
 
-  res.render('feedback', { _id, username, faculties, session: req.session });
+  res.render('feedback', { _id, username, faculties, user: req.user });
 });
 
 
 app.post('/giveFeedback', async (req, res) => {
-  const s_id = req.session._id;
+
+
+  const s_id = req.user._id;
   const { f_id, feedback_text, rating } = req.body;
 
   if(!feedback_text) return res.send("Please fill feedback text!")
@@ -259,16 +206,19 @@ app.post('/giveFeedback', async (req, res) => {
 
 
 app.get('/logout', (req, res) => {
-
-    req.session.destroy((err) => {
-      if (err) {
-        console.error('Error destroying session:', err);
-        return res.sendStatus(500); 
-      } 
-        res.redirect('/login');
-      });
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/login');
+  });
 });
 
+
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+      return next();
+  }
+  res.redirect('/login');
+}
 
 
 app.get('/about', (req, res) => {

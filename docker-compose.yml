@@ -8,3 +8,6 @@ services:
       - "8001:3000"
     environment:
       - MONGO_DBURL=mongodb+srv://220159:220159password@cluster0.0ipredr.mongodb.net/frs_app?retryWrites=true&w=majority
+      - GOOGLE_CLIENT_ID=
+      - GOOGLE_CLIENT_SECRET=
+      - GOOGLE_CALLBACK_URL=

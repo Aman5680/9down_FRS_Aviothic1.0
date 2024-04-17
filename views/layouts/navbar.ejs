@@ -68,12 +68,12 @@
               <a class="nav-link" href="/reviews">Reviews </a>
             </li>
 
-            <% if(typeof session !== 'undefined' && session && session._id) { %>
+            <% if(typeof user !== 'undefined' && user && user._id) { %>
             <li class="nav-item">
               <a class="nav-link" href="/profile">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <span>
-                  <%= session.username %>
+                  <%= user.username %>
                 </span>
               </a>
             </li>

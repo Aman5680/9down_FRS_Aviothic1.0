@@ -6,6 +6,11 @@ const Faculty = require('./models/Faculty');
 const Review = require('./models/Review');
 const checkLogin = require('./middleware/checkLogin');
 
+const passport =require("passport")
+require('./auth/google-auth');
+require('./auth/local-auth');
+const flash = require('connect-flash');
+
 const app = express();
 const port = 3000;
 
@@ -21,9 +26,30 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 // Connect Monogodb
 Connect()
+
+
+// Auth route
+
+
+
+app.get('/auth/google',
+  passport.authenticate('google', {
+          scope: ['email', 'profile'],
+          prompt: ['select_account']
+      }
+  ));
+
+app.get( '/auth/google/callback',
+    passport.authenticate( 'google', {
+        successRedirect: '/feedback',
+        failureRedirect: '/login'
+}));
 
 
 // Define routes
@@ -38,7 +64,7 @@ app.get('/home', (req, res) => {
 
 
 app.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', {error: null });
 });
 
 
@@ -56,26 +82,21 @@ app.get('/team', (req, res) => {
   res.render('team');
 });
 
+app.get('/facultyreview', (req, res) => {
+  res.render('facultyreview');
+});
+
 
 app.post('/register', async (req, res) => {
 
-  const { username, email, password, cpassword } = req.body;
+  const { username, email, password } = req.body;
 
-  if (password != cpassword)
-    return res.send("Password and Confirm Password did not matched !");
+  existingUser = await Student.findOne({ email });
 
-  data = await Student.findOne({ "username": username });
+  if (existingUser)
+    return res.render("register", { error: "You have already registered !"});
 
-  if (data)
-    return res.send("You have already registered !");
-
-  const student = new Student({
-    "username": username,
-    "email": email,
-    "password": password
-  });
-
-  student.save();
+  const student = await Student.createUser(username, email, password);
 
   console.log('Inserted documents =>', student);
 
@@ -83,9 +104,7 @@ app.post('/register', async (req, res) => {
   // req.session.username = data.username;
 
   // res.redirect('feedback');
-
   res.send("Registered Successfully !");
-
 });
 
 
@@ -110,58 +129,48 @@ app.get('/add', async (req, res) => {
 
 app.get('/login', (req, res) => {
 
-  if (req.session._id)
+  if (req.user)
     return res.redirect('feedback');
 
-  res.render('login');
+  res.render('login', { error: req.flash('error') });
 
 });
 
 
-app.post('/login', async (req, res) => {
-
-  const { username, password } = req.body;
-
-  data = await Student.findOne({ "username": username });
-
-  if (data) {
-    if (data.password == password) {
-      req.session._id = data._id;
-      req.session.username = data.username;
-
-      res.redirect('feedback');
-    }
-    else {
-      res.send("Your Username or Password is Incorrect !");
-    }
-  } else {
-    res.send("Your Username or Password is Incorrect !");
-  }
-});
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/feedback',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
 
 
 
 app.get('/reviews', async (req, res) => {
 
   const faculties = await Faculty.find();
-  res.render('reviews', { faculties, session: req.session });
+  res.render('reviews', { faculties, user: req.user });
   
 });
 
-app.get('/feedback', checkLogin, async (req, res) => {
+app.get('/feedback', isAuthenticated, async (req, res) => {
 
-  const _id = req.session._id;
-  const username = req.session.username;
+  const _id = req.user._id;
+  const username = req.user.username;
   
   const faculties = await Faculty.find();
 
-  res.render('feedback', { _id, username, faculties, session: req.session });
+  res.render('feedback', { _id, username, faculties, user: req.user });
 });
 
 
 app.post('/giveFeedback', async (req, res) => {
-  const s_id = req.session._id;
+
+
+  const s_id = req.user._id;
   const { f_id, feedback_text, rating } = req.body;
+
+  if(!feedback_text) return res.send("Please fill feedback text!")
+  if(!rating) return res.send("Please provide rating!")
 
   // Find review of the student for the faculty
   const existingReview = await Review.findOne({ "faculty": f_id, "student": s_id });
@@ -197,18 +206,19 @@ app.post('/giveFeedback', async (req, res) => {
 
 
 app.get('/logout', (req, res) => {
-  // Destroy the session
-  req.session.destroy((err) => {
-    if (err) {
-      console.error('Error destroying session:', err);
-      res.sendStatus(500);
-      return;
-    }
-
-    // Redirect to the login page or any other page
+  req.logout(function(err) {
+    if (err) { return next(err); }
     res.redirect('/login');
   });
 });
+
+
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+      return next();
+  }
+  res.redirect('/login');
+}
 
 
 app.get('/about', (req, res) => {

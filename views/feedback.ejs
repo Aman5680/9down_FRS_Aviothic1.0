@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/fevicon.png" type="image/x-icon">
+  <title>Feedback Page</title>
+
+  <%- include('layouts/styles') %>
+
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      <img src="images/hero-bg.jpg" alt="">
+    </div>
+    <!-- header section strats -->
+    <%- include('layouts/navbar') %>
+
+      <!-- end header section -->
+
+  </div>
+
+  <!-- feedback section -->
+
+  <section id="feed">
+
+    <div class="container">
+
+      <div class="d-flex justify-content-center">
+        <div class="my-div">
+          <!-- Your content goes here -->
+
+          <h3>Submit your feedback</h3>
+
+
+          <div class="alert alert-primary" role="alert">
+            <span>Username: <strong class="align-r">
+                <%= username %>
+              </strong></span><br>
+            <span>ID: <strong>
+                <%= _id %>
+              </strong></span><br>
+          </div>
+
+
+          
+
+          <form id="my-form" action="/giveFeedback" method="POST">
+
+            <div class="form-floating">
+              <label>Select faculty</label>
+              <select name="f_id" class="form-select mb-3 w-100">
+
+                <% faculties.forEach(function(item) { %>
+                  <option value=<%=item._id %> ><%= item.name %>
+                  </option>
+                  <% }); %>
+
+              </select>
+            </div>
+
+
+            <div class="form-floating">
+              <textarea name="feedback_text" required class="form-control" placeholder="Leave a comment here"
+                style="height: 125px"></textarea>
+            </div>
+
+            <div class="rate-buttons my-3">
+              <div class="form-check form-check-inline">
+                <input selected class="form-check-input" type="radio" name="rating" value="5">
+                <label class="form-check-label">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rating" value="4">
+                <label class="form-check-label">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rating" value="3">
+                <label class="form-check-label">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rating" value="2">
+                <label class="form-check-label">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rating" value="1">
+                <label class="form-check-label">1</label>
+              </div>
+            </div>
+
+            <button id="submit_btn" type="submit"
+              class="btn btn-primary my-3 d-flex w-100 justify-content-center">Submit Review</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </section>
+
+
+  <!--  section ends -->
+
+  <!-- footer section -->
+  <%- include('layouts/footer') %>
+
+    <script>
+      document.getElementById('my-form').addEventListener('submit', function (event) {
+
+        var radios = document.getElementsByName('rating');
+        var formValid = false;
+
+        for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked) {
+            formValid = true;
+            break;
+          }
+        }
+
+        if (!formValid) {
+          alert('Please select at least one option');
+          event.preventDefault(); // Prevent form submission
+        }
+
+      });
+
+    </script>
+
+    <!-- footer section -->
+
+
+</body>
+
+</html>

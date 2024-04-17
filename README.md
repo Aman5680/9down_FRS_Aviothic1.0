@@ -3,16 +3,32 @@
 
 A faculty review system which allows students to rate the faculties on the basis of their interactions.
 
-# Tech Stack
-I have used these technologies to build the web application
-- HTML
-- CSS
-- Node JS
-- Express JS
-- MongoDB
-- Bootstrap 5
-- FontAwesome
-- Google Fonts
+<img width="25%" height="25%" src="https://github.com/SanjaySRocks/9down_FRS_Aviothic1.0/blob/main/public/images/FAVICON.png">
+
+# Live Preview
+Link:- https://frs-85kd.onrender.com
+
+# Deployement
+
+```
+npm install
+```
+
+```
+npm start
+```
+
+# Deployement using Docker
+
+Note:- You must install docker and docker-compose package to run this command
+
+```
+docker-compose up
+```
+
+
+# Screenshots
+<a href="https://imgur.com/2jR6980"><img width="50%" height="50%" src="https://i.imgur.com/2jR6980.png" title="source: imgur.com" /></a>
 
 ## Features
 
@@ -22,6 +38,20 @@ I have used these technologies to build the web application
 - Cross platform
 - Customised Design
 - Dynamic Web Pages
+
+
+# Tech Stack
+Technologies used to build the web application
+
+- HTML
+- CSS
+- Node JS
+- Express JS
+- MongoDB
+- Bootstrap 5
+- FontAwesome
+- Google Fonts
+
 
 ## Installation
 

@@ -1,14 +1,20 @@
-FROM node:latest
+# Download latest nodejs image as base
+FROM node:alpine
 
+# Set the working directory in the container
 WORKDIR /app
 
-RUN apt update -y && apt upgrade -y
-RUN apt install git -y
+# Copy package.json and package-lock.json (if available)
+COPY package*.json ./
 
-RUN git clone https://github.com/SanjaySRocks/9down_FRS_Aviothic1.0.git .
-
+# Install dependencies
 RUN npm install
 
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port the app runs on
 EXPOSE 3000
 
-CMD ["npm","start"]
+# Command to run the application
+CMD ["npm", "start"]
